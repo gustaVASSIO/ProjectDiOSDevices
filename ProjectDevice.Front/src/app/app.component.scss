@@ -1,0 +1,27 @@
+#top-brand-img{
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+}
+#logo-brand-img{
+    width: 320px;
+}
+#contnet-main-principal-route{
+    margin-top: 70px;
+    padding: 0 80px;
+}
+#tool-bar-divider{
+    margin-top: 60px;
+    border-top: 3px solid #0E6FAD;
+}
+mat-toolbar{
+    padding: 0 30px;
+    background-color: #fff;
+}
+mat-toolbar-row{
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}

@@ -1,0 +1,21 @@
+<div id="cards-container">
+    <mat-card *ngFor="let device of devices$ | async" class="mat-elevation-z8">
+        <mat-card-header>
+            <mat-card-title>
+                <p class="highlight -size-2xl">{{device.name}}</p>
+            </mat-card-title>
+        </mat-card-header>
+        <img class="img-card" mat-card-image [src]="device.fotoPath != null? (fileURL + device.fotoPath) : 
+        '/assets/Templates/no-image.png'">
+
+        <mat-card-actions>
+            <button type="submit" class="a-button a-button--primary -without-icon">
+                <span class="a-button__label">See More</span>
+            </button>
+            <button (click)="handleDownloadDocument(device.documentPath!)" type="submit"
+                class="a-button a-button--primary -without-icon">
+                <span class="a-button__label">Download Doc</span>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
