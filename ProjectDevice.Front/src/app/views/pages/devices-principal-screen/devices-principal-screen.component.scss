@@ -5,6 +5,11 @@
     justify-content: space-between;
     display: flex;
 }
+#img-card{
+    padding: 0px 30px;
+    width: 460px;
+    height: 300px;
+}
 mat-card-header{
     justify-content: center;    
 
@@ -22,9 +27,7 @@ a:hover{
    color: #fff;
 }
 
-.img-card{
-    padding: 0px 30px;
-}
+
 .a-button {
     margin-right: 10px;
 }

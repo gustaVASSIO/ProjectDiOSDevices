@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProjectDevice.API.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
@@ -6,8 +7,7 @@ namespace ProjectDevice.API.DTO
 {
     public class DeviceDTO
     {
-        
-        public string DeviceId { get; set; }
+        public Guid DeviceId { get; set; }
 
         [Required(ErrorMessage = "name field is required")]
         public string Name { get; set; }
@@ -20,6 +20,8 @@ namespace ProjectDevice.API.DTO
 
         [AllowNull]
         public string DocumentPath { get; set; }
+
+        public List<Subscription> Subscriptions { get; set; } = new List<Subscription>();
 
 
     }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProjectDevice.API.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ProjectDevice.API.DTO
@@ -15,6 +16,5 @@ namespace ProjectDevice.API.DTO
         public IFormFile Foto { get; set; }
         [AllowNull]
         public IFormFile Document { get; set; }
-
     }
 }

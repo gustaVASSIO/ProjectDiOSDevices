@@ -10,5 +10,8 @@ namespace ProjectDevice.API.Context
         }
 
         public DbSet<Device> Devices { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+
+
     }
 }

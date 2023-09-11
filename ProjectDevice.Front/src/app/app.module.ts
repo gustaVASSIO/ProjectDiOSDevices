@@ -8,14 +8,14 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './matarial/material.module';
 import { DevicesPrincipalScreenComponent } from './views/pages/devices-principal-screen/devices-principal-screen.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TestFileComponent } from './views/pages/test-file/test-file.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DetailsDeviceComponent } from './views/pages/details-device/details-device.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DevicesPrincipalScreenComponent,
-    TestFileComponent
+    DetailsDeviceComponent,
   ],
   imports: [
     BrowserModule,

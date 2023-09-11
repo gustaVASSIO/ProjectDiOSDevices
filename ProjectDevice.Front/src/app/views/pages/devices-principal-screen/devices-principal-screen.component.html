@@ -5,11 +5,11 @@
                 <p class="highlight -size-2xl">{{device.name}}</p>
             </mat-card-title>
         </mat-card-header>
-        <img class="img-card" mat-card-image [src]="device.fotoPath != null? (fileURL + device.fotoPath) : 
+        <img id="img-card" mat-card-image [src]="device.fotoPath != null? (fileURL + device.fotoPath) : 
         '/assets/Templates/no-image.png'">
 
         <mat-card-actions>
-            <button type="submit" class="a-button a-button--primary -without-icon">
+            <button [routerLink]="['/device',device.deviceId]" type="submit" class="a-button a-button--primary -without-icon">
                 <span class="a-button__label">See More</span>
             </button>
             <button (click)="handleDownloadDocument(device.documentPath!)" type="submit"

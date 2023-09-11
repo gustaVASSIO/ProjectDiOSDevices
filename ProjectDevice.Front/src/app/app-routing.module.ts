@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DevicesPrincipalScreenComponent } from './views/pages/devices-principal-screen/devices-principal-screen.component';
-import { TestFileComponent } from './views/pages/test-file/test-file.component';
+import { DetailsDeviceComponent } from './views/pages/details-device/details-device.component';
 
 const routes: Routes = [
   {
@@ -13,8 +13,8 @@ const routes: Routes = [
     component:  DevicesPrincipalScreenComponent
   },
   {
-    path: 'test-files',
-    component:  TestFileComponent
+    path: 'device/:id',
+    component:  DetailsDeviceComponent
   }
 ];
 
