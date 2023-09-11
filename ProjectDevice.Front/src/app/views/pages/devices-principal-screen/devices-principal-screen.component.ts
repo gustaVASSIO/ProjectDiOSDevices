@@ -15,7 +15,7 @@ export class DevicesPrincipalScreenComponent implements OnInit {
 
   public devices$ !: Observable<Device[]>
   
-  public fileURL : string = environment.URLFiles
+  public readonly fileURL : string = environment.URLFiles
 
   constructor
   (

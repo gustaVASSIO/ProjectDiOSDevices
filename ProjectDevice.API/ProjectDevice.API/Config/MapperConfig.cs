@@ -12,6 +12,8 @@ namespace server.Config
             {
                 conf.CreateMap<DeviceDTO, Device>().ReverseMap();
                 conf.CreateMap<DeviceCreateDTO, Device>().ReverseMap();
+                conf.CreateMap<SubscriptionDto, Subscription>().ReverseMap();
+                conf.CreateMap<SubscriptionCreatedDTO, Subscription>().ReverseMap();
 
             });
             return mappConfig;

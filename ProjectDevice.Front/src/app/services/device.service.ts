@@ -22,8 +22,8 @@ export class DeviceService {
     return this.http.post<Device>(`${environment.API}/Devices`, formData)
   }
 
-  public putDevice(device : Device) : Observable<Device>{
-   return this.http.put<Device>(`${environment.API}/Devices`, device)
+  public putDevice(id: string, formData : FormData) : Observable<Device>{
+   return this.http.put<Device>(`${environment.API}/Devices/${id}`, formData)
   }
 
   public uploadFile(id: string, deviceFiles : FormData) : Observable<any>{

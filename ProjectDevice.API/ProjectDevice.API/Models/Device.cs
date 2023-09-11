@@ -7,33 +7,33 @@ namespace ProjectDevice.API.Models
     [Table(name: "devices")]
     public class Device
     {
-        [Column(name: "deviceId")]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column(name: "device_id")]
         [StringLength(80)]
-        public string DeviceId { get; set; }
+        public Guid DeviceId { get; set; }
         
         [Column(name: "name")]
         [StringLength(50)]
+        [Required(ErrorMessage = "name field is required")]
         public string Name { get; set; }
         
         [Column(name: "description")]
-        [StringLength(400)]
+        [Required(ErrorMessage = "description field is required")]
         public string Description { get; set; }
         
         [Column(name: "foto_path")]
-        [StringLength(80)]
+        [StringLength(300)]
         [AllowNull]
         public string FotoPath { get; set; }
         
         
         [Column(name: "document_path")]
-        [StringLength(80)]
+        [StringLength(300)]
         [AllowNull]
         public string DocumentPath { get; set; }
 
-        public Device()
-        {
-            DeviceId = Guid.NewGuid().ToString();
-        }
+        public List<Subscription> Subscriptions { get; set; } = new List<Subscription>();
+
     }
    
 }

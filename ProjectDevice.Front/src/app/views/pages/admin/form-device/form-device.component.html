@@ -1,15 +1,9 @@
-<div id="form-container" *ngIf="!isEditing; else editingTemplate">
-    <div class="highlight -size-2xl">Register Device:</div>
+<div id="form-container">
+    <div *ngIf="!isEditing" class="highlight -size-2xl">Register Device:</div>
+    <div *ngIf="isEditing" class="highlight -size-2xl">Editing Device:</div>
     <hr class="a-divider" />
-    <br>
-    <form [formGroup]="formDevice" (ngSubmit)="registerDevice()">
-
-        <input id="photoPath" name="fotoFile" (change)="setFotoFile($event)" type="file" />
-        <br>
-        <br>
-        <img [src]="files + device?.fotoPath" alt="">
-
-        <br>
+    <form [formGroup]="formDevice">
+        <img *ngIf="isEditing" [src]="files + device?.fotoPath" alt="">
         <div class="m-form-field">
             <div class="a-text-field">
                 <label for="1">Name</label>
@@ -17,58 +11,74 @@
             </div>
         </div>
         <br>
-        <div class="m-form-field">
-            <div class="a-text-field">
-                <label for="2">Description</label>
-                <input formControlName="description" id="2" type="text" />
+        <div class="a-text-area">
+            <label for="description">Description</label>
+            <textarea formControlName="description" id="description"></textarea>
+        </div>
+        <br>
+        <div class="a-file-upload-input">
+            <label *ngIf="!isEditing" for="fotoFileInput">
+                <i class="a-icon boschicon-bosch-ic-upload" title="upload icon"></i>
+                Choose a Image
+            </label>
+            <label *ngIf="isEditing" for="fotoFileInput">
+                <i class="a-icon boschicon-bosch-ic-upload" title="upload icon"></i>
+                Update device Image
+            </label>
+            <input (change)="setFotoFile($event)" id="fotoFileInput" name="file upload input" type="file" />
+            <div class="a-file-upload-input__preview">
+                <p>{{formDevice.value.fotoName}}</p>
             </div>
         </div>
         <br>
-        <input id="documentPath" (change)="setDocumentFile($event)" type="file" />
+        <div class="a-file-upload-input">
+            <label *ngIf="!isEditing" for="documentFileInput">
+                <i class="a-icon boschicon-bosch-ic-upload" title="upload icon"></i>
+                Choose a Document
+            </label>
+            <label *ngIf="isEditing" for="documentFileInput">
+                <i class="a-icon boschicon-bosch-ic-upload" title="upload icon"></i>
+                Update device Document
+            </label>
+            <input (change)="setDocumentFile($event)" id="documentFileInput" name="file upload input" type="file" />
+            <div class="a-file-upload-input__preview">
+                <p>{{formDevice.value.documentName}}</p>
+            </div>
+        </div>
         <br>
+        <div id="subscriptiosn-container" class="mat-elevation-z8">
+            <h4>Subscriptions:</h4>
+            <button (click)="addSubscriptionOnForms()" mat-raised-button ><i class="a-icon ui-ic-plus" title="plus"></i> Add subscription</button>
+            <br>
+            <br>
+            <div class="subscriptions-fields-container" *ngFor="let subscription of arraySubscriptiosForGenerateInputs">
+                <h5>Specification {{subscription+1}}</h5>
+                <div class="a-text-field">
+                    <label>Specification Name {{subscription+1}}</label>
+                    <input [formControlName]="'subscription_title_'+subscription" type="text" />
+                </div>
+                <div class="a-text-field">
+                    <label>Specification Description {{subscription+1}}</label>
+                    <input formControlName="{{'subscription_description_'+subscription}}" type="text" />
+                </div>
+                <i *ngIf="!isEditing" (click)="deleteSubscriptionFromForms()" 
+                class="a-icon boschicon-bosch-ic-delete" title="delete"></i>
+
+                <i (click)="[deleteSubscriptionFromForms(), deleteSubscription()]" 
+                *ngIf="isEditing"
+                matTooltip="You'll delete this specification"
+                matTooltipPosition="after"
+                class="a-icon boschicon-bosch-ic-delete" title="delete"></i>
+            </div>
+
+        </div>
         <br>
-        <button *ngIf="!isEditing" type="submit" class="a-button a-button--primary -without-icon">
+        <button (click)="registerDevice()" *ngIf="!isEditing" type="submit" class="a-button a-button--primary -without-icon">
             <span class="a-button__label">Register new device</span>
         </button>
-        <br>
+        <button (click)="updateDevice()" *ngIf="isEditing" type="submit" class="a-button a-button--primary -without-icon">
+            <span class="a-button__label">Save Changes</span>
+        </button>
+
     </form>
 </div>
-
-
-<ng-template id="form-container" #editingTemplate>
-    <div class="highlight -size-2xl">Editing Device:</div>
-    <hr class="a-divider" />
-    <br>
-    <form [formGroup]="formDevice" (ngSubmit)="updateDevice()">
-
-        <img [src]="files + device?.fotoPath" alt="">
-        <br>
-        <input id="photoPath" name="fotoFile" (change)="setFotoFile($event)" type="file" />
-        <br>
-        <br>
-
-        <input id="documentPath" (change)="setDocumentFile($event)" type="file" />
-        <br>
-        <br>
-
-        <div class="m-form-field">
-            <div class="a-text-field">
-                <label for="1">Name</label>
-                <input formControlName="name" id="1" type="text" />
-            </div>
-        </div>
-        <br>
-        <div class="m-form-field">
-            <div class="a-text-field">
-                <label for="2">Description</label>
-                <input formControlName="description" id="2" type="text" />
-            </div>
-        </div>
-        <br>
-       
-        <button type="submit" class="a-button a-button--primary -without-icon">
-            <span class="a-button__label">Save Edit Device</span>
-        </button>
-        <br>
-    </form>
-</ng-template>
