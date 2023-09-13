@@ -1,4 +1,5 @@
 ﻿using ProjectDevice.API.Middlewares.Exceptions;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Net;
 using System.Runtime.CompilerServices;

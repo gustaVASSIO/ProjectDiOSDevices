@@ -29,7 +29,8 @@ namespace ProjectDevice.API.Controllers
                 var subscription = new Subscription()
                 {
                     Title = subs.Title,
-                    Description = subs.Description
+                    Description = subs.Description,
+                    DeviceId = subs.DeviceId
                 };
                 _subscriptionRepository.Insert(subscription);
             }

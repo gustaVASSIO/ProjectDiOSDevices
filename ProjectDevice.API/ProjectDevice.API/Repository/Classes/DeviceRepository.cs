@@ -5,6 +5,7 @@ using ProjectDevice.API.DTO;
 using ProjectDevice.API.Middlewares.Exceptions;
 using ProjectDevice.API.Models;
 using ProjectDevice.API.Repository.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectDevice.API.Repository.Classes
 {
@@ -59,6 +60,8 @@ namespace ProjectDevice.API.Repository.Classes
                 DeleteFileByPath(filePath + "\\" + device.DocumentPath);
                 device.DocumentPath = await HandleFile(deviceDto.Document);
             }
+
+            Validator.ValidateObject(device, new ValidationContext(device), validateAllProperties: true);
 
             _context.Devices.Add(device);
 

@@ -10,12 +10,17 @@ import { DevicesPrincipalScreenComponent } from './views/pages/devices-principal
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DetailsDeviceComponent } from './views/pages/details-device/details-device.component';
+import { LoginComponent } from './views/pages/login/login.component';
+import { UserService } from './services/user.service';
+import SignGuard from './guards/signGuard.guard';
+import AuthGuard from './guards/authGuard.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     DevicesPrincipalScreenComponent,
     DetailsDeviceComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,7 @@ import { DetailsDeviceComponent } from './views/pages/details-device/details-dev
     MaterialModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UserService, SignGuard, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

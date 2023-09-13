@@ -1,6 +1,7 @@
 <div id="container" *ngIf="deviceDetails | async as device">
     <div id="details-device-container">
-        <img [src]="fileURL + device.fotoPath" alt="" />
+        <img [src]="device.fotoPath != null? (fileURL + device.fotoPath) : 
+        '/assets/Templates/no-image.png'" alt="" />
         <h1>{{device.name}}</h1>
         <p id="device-description">{{device.description}}</p>
         <div id="device-subscriptions-container" class="mat-elevation-z8">

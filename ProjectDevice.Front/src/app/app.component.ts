@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +9,11 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(private readonly router : Router){}
+  constructor(
+    public readonly userService : UserService
+    ){}
   
   ngOnInit(): void {  
-    this.router.events.subscribe(event => {
-    if (event instanceof NavigationEnd) {
-    if (document.getElementById("frok_js") != null) {
-    document.getElementById("frok_js")?.remove();
-    }
-    const scriptTag = document.createElement("script");
-    scriptTag.src = "content/frok/frontend-kit.js";
-    scriptTag.id = "frok_js";
-    document.body.appendChild(scriptTag);
-    }
-  
-    });
+    this.userService.verifyUserIsLoged()
   }
 }
