@@ -20,6 +20,12 @@ namespace ProjectDevice.API.Controllers
             _subscriptionRepository = subscriptionRepository;
             _mapper = mapper;
         }
+        [HttpGet]
+        public async Task<ActionResult<List<Subscription>>> GetSusbscriptions()
+        {
+            var subscrioptions = await _subscriptionRepository.FindAllAsync();
+            return Ok(subscrioptions);
+        }
 
         [HttpPost]
         public async Task<ActionResult> PostSubscriptions(List<SubscriptionCreatedDTO> subscriptionsDto)
@@ -29,7 +35,8 @@ namespace ProjectDevice.API.Controllers
                 var subscription = new Subscription()
                 {
                     Title = subs.Title,
-                    Description = subs.Description
+                    Description = subs.Description,
+                    DeviceId = subs.DeviceId
                 };
                 _subscriptionRepository.Insert(subscription);
             }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Device, DeviceFiles } from '@app/models/device.model';
 import Subscription from '@app/models/subscription.model';
@@ -34,7 +35,7 @@ export class FormDeviceComponent implements OnInit {
   constructor(
     private readonly deviceService: DeviceService,
     private readonly subscriptionService: SubscriptionService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
 
   ) { }
 
@@ -70,7 +71,7 @@ export class FormDeviceComponent implements OnInit {
         } as Subscription)
       })
 
-      this.subscriptionService.putSubscription(susbscriptions).subscribe()
+      this.subscriptionService.postSubscriptions(susbscriptions).subscribe()
     })
 
   }
@@ -86,16 +87,19 @@ export class FormDeviceComponent implements OnInit {
 
 
     this.deviceService.putDevice(this.idDeviceForEdit, formData).subscribe(device =>{
-      // this.arraySubscriptiosForGenerateInputs.forEach(e => {
-      //   susbscriptions.push({
-      //     title: this.formDevice.controls['subscription_title_' + e].value,
-      //     description: this.formDevice.controls['subscription_description_' + e].value,
-      //     deviceId: device.deviceId
-        
-      //   } as Subscription)
-      // })
+      console.log(device);
       
-      // this.subscriptionService.putSubscription(susbscriptions).subscribe()
+      this.arraySubscriptiosForGenerateInputs.forEach((e) => {
+        susbscriptions.push({
+          subscriptionId : this.device?.subscriptions[e].subscriptionId,
+          title: this.formDevice.controls['subscription_title_' + e].value,
+          description: this.formDevice.controls['subscription_description_' + e].value,
+          deviceId: this.device?.deviceId
+        
+        } as Subscription)
+      })
+      
+      this.subscriptionService.putSubscription(susbscriptions).subscribe()
     })
   }
 
@@ -127,6 +131,7 @@ export class FormDeviceComponent implements OnInit {
     this.arraySubscriptiosForGenerateInputs = [...Array(this.subscriptionsNumberOfFields).keys()]
   }
 
+
   public deleteSubscription() {
   }
 
@@ -143,9 +148,6 @@ export class FormDeviceComponent implements OnInit {
         this.formDevice.controls['subscription_title_' + i].patchValue(subs.title)
         this.formDevice.controls['subscription_description_' + i].patchValue(subs.description)
       });
-
-      console.log(this.formDevice.controls);
-
     })
   }
 }

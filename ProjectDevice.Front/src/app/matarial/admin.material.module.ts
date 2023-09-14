@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
   ]
 })
 export class AdminMaterialModule { }

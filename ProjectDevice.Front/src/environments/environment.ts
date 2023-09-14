@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
-  API:"https://localhost:7248/api",
+  DeviceAPI:"https://localhost:7248/api",
+  UserManagerAPI:"https://localhost:7001/api/Auth",
   URLFiles:"https://localhost:7248/Static/"
 };
 

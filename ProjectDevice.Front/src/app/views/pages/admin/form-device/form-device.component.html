@@ -47,7 +47,7 @@
         </div>
         <br>
         <div id="subscriptiosn-container" class="mat-elevation-z8">
-            <h4>Subscriptions:</h4>
+            <h4>Specifications:</h4>
             <button (click)="addSubscriptionOnForms()" mat-raised-button ><i class="a-icon ui-ic-plus" title="plus"></i> Add subscription</button>
             <br>
             <br>
@@ -76,7 +76,7 @@
         <button (click)="registerDevice()" *ngIf="!isEditing" type="submit" class="a-button a-button--primary -without-icon">
             <span class="a-button__label">Register new device</span>
         </button>
-        <button (click)="updateDevice()" *ngIf="isEditing" type="submit" class="a-button a-button--primary -without-icon">
+        <button [disabled]="!formDevice.valid" (click)="updateDevice()" *ngIf="isEditing" type="submit" class="a-button a-button--primary -without-icon">
             <span class="a-button__label">Save Changes</span>
         </button>
 

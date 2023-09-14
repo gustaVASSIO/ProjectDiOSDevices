@@ -1,0 +1,22 @@
+<div id="login-container">
+    <div id="form-fields">
+        <form [formGroup]="formLogin" (ngSubmit)="confirmLogin()">
+            <div class="m-form-field">
+                <div class="a-text-field">
+                    <label for="1">Username</label>
+                    <input formControlName="username" id="1" type="text" />
+                </div>
+            </div>
+            <div class="m-form-field">
+                <div class="a-text-field">
+                    <label for="1">Password</label>
+                    <input formControlName="password" id="1" type="password" />
+                </div>
+            </div>
+            <button class="a-button a-button--primary -without-icon">
+                <span class="a-button__label">Sing in</span>
+            </button>
+        </form>
+    </div>
+
+</div>

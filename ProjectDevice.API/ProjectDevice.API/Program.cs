@@ -59,6 +59,7 @@ app.UseStaticFiles(new StaticFileOptions()
 });
 
 app.UseMiddleware(typeof(GlobalErrorHandlerMiddleware));
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

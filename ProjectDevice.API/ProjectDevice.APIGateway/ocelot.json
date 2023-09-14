@@ -1,0 +1,58 @@
+{
+  "Routes": [
+    //Devices
+    {
+      "DownstreamPathTemplate": "/api/Devices",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7248
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Devices",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Devices/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7248
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Devices/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //Subscritpions
+    {
+      "DownstreamPathTemplate": "/api/Subscriptions",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7248
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Subscriptions",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+    },
+    //UserAuth 7001
+    {
+      "DownstreamPathTemplate": "/api/Auth/Login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Auth/Login",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7240"
+  }
+}

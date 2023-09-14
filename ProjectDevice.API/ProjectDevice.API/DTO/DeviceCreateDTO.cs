@@ -8,13 +8,16 @@ namespace ProjectDevice.API.DTO
     {
 
         [Required(ErrorMessage = "name field is required")]
+        [MaxLength(50, ErrorMessage = "Name lenght must be less than 50") ]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "description field is required")]
+        [Required(ErrorMessage = "Description field is required")]
+        [MaxLength(1000, ErrorMessage = "Description lenght must be less than 1000")]
         public string Description { get; set; }
         [AllowNull]
         public IFormFile Foto { get; set; }
         [AllowNull]
         public IFormFile Document { get; set; }
+
     }
 }
