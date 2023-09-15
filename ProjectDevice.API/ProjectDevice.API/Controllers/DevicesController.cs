@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectDevice.API.DTO;
 using ProjectDevice.API.Models;
 using ProjectDevice.API.Repository.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectDevice.API.Controllers
 {

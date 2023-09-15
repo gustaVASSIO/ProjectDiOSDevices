@@ -1,13 +1,14 @@
-﻿using ProjectDevice.API.Models;
+﻿using Microsoft.Extensions.Logging.Abstractions;
+using ProjectDevice.API.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ProjectDevice.API.DTO
 {
-    public class DeviceCreateDTO
+    public class DeviceCreateDTO : IValidatableObject
     {
 
-        [Required(ErrorMessage = "name field is required")]
+        [Required(ErrorMessage = "Name field is required")]
         [MaxLength(50, ErrorMessage = "Name lenght must be less than 50") ]
         public string Name { get; set; }
 
@@ -19,5 +20,11 @@ namespace ProjectDevice.API.DTO
         [AllowNull]
         public IFormFile Document { get; set; }
 
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Name == "null") yield return new ValidationResult("Name field is required");
+            if (Description == "null") yield return new ValidationResult("Description field is required");
+            yield return ValidationResult.Success;
+        }
     }
 }

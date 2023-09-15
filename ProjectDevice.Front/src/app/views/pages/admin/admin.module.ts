@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminMaterialModule } from '@app/matarial/admin.material.module';
 import { ShortDescriptionPipe } from '@app/shared/pipes/short-description.pipe';
+import { InterceptorModule } from '@app/interceptors/interceptor.module';
+import { AdminPrimeModule } from '@app/prime/admin.prime.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ShortDescriptionPipe } from '@app/shared/pipes/short-description.pipe';
     AdminRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AdminMaterialModule
+    AdminMaterialModule,
+    AdminPrimeModule,
+    InterceptorModule
   ]
 })
 export class AdminModule { }
