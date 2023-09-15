@@ -4,5 +4,9 @@ export interface UserLogin{
 }
 
 export interface UserToken{
-    
+    userId : string,
+    authenticated : boolean,
+    token : string,
+    userName : string,
+    role : string,
 }

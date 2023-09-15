@@ -24,7 +24,7 @@ export class UserService {
     ) { }
 
     public login(user: UserLogin): Observable<UserToken> {
-        return this.http.post<UserToken>(`${environment.UserManagerAPI}/Login`, user)
+        return this.http.post<UserToken>(`${environment.API}/Auth/Login`, user)
     }
 
     public logout(): void {

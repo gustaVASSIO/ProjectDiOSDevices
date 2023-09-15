@@ -1,4 +1,6 @@
 <div id="form-container">
+    <p-toast key="success" (onClose)="message.redirect('admin/devices-registered')"></p-toast>
+    <p-toast key="error" ></p-toast>
     <div *ngIf="!isEditing" class="highlight -size-2xl">Register Device:</div>
     <div *ngIf="isEditing" class="highlight -size-2xl">Editing Device:</div>
     <hr class="a-divider" />
@@ -73,7 +75,7 @@
 
         </div>
         <br>
-        <button (click)="registerDevice()" *ngIf="!isEditing" type="submit" class="a-button a-button--primary -without-icon">
+        <button [disabled]="!formDevice.valid" (click)="registerDevice()" *ngIf="!isEditing" type="submit" class="a-button a-button--primary -without-icon">
             <span class="a-button__label">Register new device</span>
         </button>
         <button [disabled]="!formDevice.valid" (click)="updateDevice()" *ngIf="isEditing" type="submit" class="a-button a-button--primary -without-icon">

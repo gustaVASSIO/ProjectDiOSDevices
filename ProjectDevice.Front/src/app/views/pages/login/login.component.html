@@ -1,4 +1,5 @@
 <div id="login-container">
+    <p-toast key="error"></p-toast>
     <div id="form-fields">
         <form [formGroup]="formLogin" (ngSubmit)="confirmLogin()">
             <div class="m-form-field">
@@ -13,7 +14,7 @@
                     <input formControlName="password" id="1" type="password" />
                 </div>
             </div>
-            <button class="a-button a-button--primary -without-icon">
+            <button [disabled]="!formLogin.valid" class="a-button a-button--primary -without-icon">
                 <span class="a-button__label">Sing in</span>
             </button>
         </form>

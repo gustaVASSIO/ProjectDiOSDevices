@@ -14,6 +14,8 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { UserService } from './services/user.service';
 import SignGuard from './guards/signGuard.guard';
 import AuthGuard from './guards/authGuard.guard';
+import { InterceptorModule } from './interceptors/interceptor.module';
+import { PrimeModule } from './prime/prime.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import AuthGuard from './guards/authGuard.guard';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PrimeModule
   ],
   providers: [UserService, SignGuard, AuthGuard],
   bootstrap: [AppComponent]

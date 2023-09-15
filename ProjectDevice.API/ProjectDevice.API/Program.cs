@@ -1,15 +1,15 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Options;
-using Microsoft.OData.ModelBuilder;
+using Microsoft.IdentityModel.Tokens;
 using ProjectDevice.API.Context;
 using ProjectDevice.API.Middlewares;
-using ProjectDevice.API.Models;
 using ProjectDevice.API.Repository.Classes;
 using ProjectDevice.API.Repository.Interfaces;
 using server.Config;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,15 +34,35 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Configuring OData
-ODataModelBuilder modelBuilder = new ODataModelBuilder();
-modelBuilder.EntitySet<Device>("Devices")
-    .EntityType.HasKey(d => d.DeviceId);
-modelBuilder.EntitySet<Subscription>("Subscriptions")
-    .EntityType.HasKey(s => s.SubscriptionId);
+//Configuring JwtAuthorization
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = false,
+        ValidAudience = builder.Configuration["TokenConfiguration:Audience"],
+        ValidIssuer = builder.Configuration["TokenConfiguration:Issuer"],
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]))
+    };
+});
 
-builder.Services.AddControllers().AddOData(opt => opt.EnableQueryFeatures(null)
-.AddRouteComponents(model: modelBuilder.GetEdmModel()));
+
+//Configuring OData
+//ODataModelBuilder modelBuilder = new ODataModelBuilder();
+//modelBuilder.EntitySet<Device>("Devices")
+//    .EntityType.HasKey(d => d.DeviceId);
+//modelBuilder.EntitySet<Subscription>("Subscriptions")
+//    .EntityType.HasKey(s => s.SubscriptionId);
+
+builder.Services.AddControllers().AddOData(opt => opt.EnableQueryFeatures(null));
+//.AddRouteComponents(model: modelBuilder.GetEdmModel()));
 
 
 var app = builder.Build();
@@ -62,6 +82,7 @@ app.UseMiddleware(typeof(GlobalErrorHandlerMiddleware));
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors(x =>

@@ -10,9 +10,9 @@ export class SubscriptionService {
   constructor(private http: HttpClient) { }
   
   public postSubscriptions(subscription : Subscription[]) : Observable<Subscription>{
-    return this.http.post<Subscription>(`${environment.DeviceAPI}/Subscriptions`,subscription)
+    return this.http.post<Subscription>(`${environment.API}/Subscriptions`,subscription)
   }
   public putSubscription(subscription : Subscription[]) : Observable<Subscription>{
-    return this.http.put<Subscription>(`${environment.DeviceAPI}/Subscriptions`,subscription)
+    return this.http.put<Subscription>(`${environment.API}/Subscriptions`,subscription)
   }
 }

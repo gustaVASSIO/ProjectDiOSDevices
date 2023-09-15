@@ -11,7 +11,22 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/Devices",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+      "UpstreamHttpMethod": [ "GET"]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Devices",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7248
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "UpstreamPathTemplate": "/gateway/Devices",
+      "UpstreamHttpMethod": [ "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/Devices/{id}",
@@ -23,7 +38,7 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/Devices/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET", "PUT" ]
     },
     //Subscritpions
     {
@@ -35,6 +50,9 @@
           "Port": 7248
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
       "UpstreamPathTemplate": "/gateway/Subscriptions",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
     },
