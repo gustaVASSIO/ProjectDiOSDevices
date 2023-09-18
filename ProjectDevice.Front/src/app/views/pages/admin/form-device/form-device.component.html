@@ -66,7 +66,7 @@
                 <i *ngIf="!isEditing" (click)="deleteSubscriptionFromForms()" 
                 class="a-icon boschicon-bosch-ic-delete" title="delete"></i>
 
-                <i (click)="[deleteSubscriptionFromForms(), deleteSubscription()]" 
+                <i (click)="deleteSubscriptionFromForms()" 
                 *ngIf="isEditing"
                 matTooltip="You'll delete this specification"
                 matTooltipPosition="after"

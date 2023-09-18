@@ -56,6 +56,21 @@
       "UpstreamPathTemplate": "/gateway/Subscriptions",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
     },
+    {
+      "DownstreamPathTemplate": "/api/Subscriptions/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7248
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "UpstreamPathTemplate": "/gateway/Subscriptions/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
     //UserAuth 7001
     {
       "DownstreamPathTemplate": "/api/Auth/Login",

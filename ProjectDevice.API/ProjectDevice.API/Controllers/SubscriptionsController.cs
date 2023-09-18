@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectDevice.API.DTO;
+using ProjectDevice.API.Middlewares.Exceptions;
 using ProjectDevice.API.Models;
 using ProjectDevice.API.Repository.Interfaces;
 using System.Reflection.Metadata.Ecma335;
@@ -58,6 +59,18 @@ namespace ProjectDevice.API.Controllers
             await _subscriptionRepository.Commit();
 
             return Ok();
+        }
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteSusbscription(int id)
+        {
+            var verifyDelete = await _subscriptionRepository.Delete(id);
+
+            if (verifyDelete)
+                await _subscriptionRepository.Commit();
+            else
+                throw new EntityNotFoundException("Subscription not found");
+
+            return NoContent();
         }
     }
 }

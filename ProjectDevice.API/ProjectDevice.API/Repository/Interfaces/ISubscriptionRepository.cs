@@ -9,6 +9,8 @@ namespace ProjectDevice.API.Repository.Interfaces
         Task<List<Subscription>> FindAllAsync();
         void Insert(Subscription subscription);
         void Update(Subscription subscription);
+        Task<bool> Delete(int id);
         Task Commit();
+
     }
 }
