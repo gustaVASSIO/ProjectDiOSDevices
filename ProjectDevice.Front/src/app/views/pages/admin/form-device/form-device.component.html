@@ -50,29 +50,29 @@
         <br>
         <div id="subscriptiosn-container" class="mat-elevation-z8">
             <h4>Specifications:</h4>
-            <button (click)="addSubscriptionOnForms()" mat-raised-button ><i class="a-icon ui-ic-plus" title="plus"></i> Add subscription</button>
+            <button [disabled]="subscriptionsNumberOfFields>=6" (click)="addSubscriptionOnForms()" mat-raised-button ><i class="a-icon ui-ic-plus" title="plus"></i> Add subscription</button>
             <br>
             <br>
-            <div class="subscriptions-fields-container" *ngFor="let subscription of arraySubscriptiosForGenerateInputs">
-                <h5>Specification {{subscription+1}}</h5>
+            <div class="subscriptions-fields-container" *ngFor="let subscription of susbscriptionsArray, let i=index">
+                <h5>Specification {{i+1}}</h5>
                 <div class="a-text-field">
-                    <label>Specification Name {{subscription+1}}</label>
-                    <input [formControlName]="'subscription_title_'+subscription" type="text" />
+                    <label>Specification Name {{i+1}}</label>
+                    <input [formControlName]="'subscription_title_'+i" type="text" />
                 </div>
                 <div class="a-text-field">
-                    <label>Specification Description {{subscription+1}}</label>
-                    <input formControlName="{{'subscription_description_'+subscription}}" type="text" />
+                    <label>Specification Description {{i+1}}</label>
+                    <input formControlName="{{'subscription_description_'+i}}" type="text" />
                 </div>
-                <i *ngIf="!isEditing" (click)="deleteSubscriptionFromForms()" 
+                <i *ngIf="!isEditing" (click)="deleteSubscriptionFromForms(i)" 
                 class="a-icon boschicon-bosch-ic-delete" title="delete"></i>
 
-                <i (click)="deleteSubscriptionFromForms()" 
+                <!-- <i (click)="deleteSubscriptionFromForms()" 
                 *ngIf="isEditing"
                 matTooltip="You'll delete this specification"
                 matTooltipPosition="after"
-                class="a-icon boschicon-bosch-ic-delete" title="delete"></i>
+                class="a-icon boschicon-bosch-ic-delete" title="delete"></i> -->
             </div>
-
+            {{subscriptionsNumberOfFields}}/6
         </div>
         <br>
         <button [disabled]="!formDevice.valid" (click)="registerDevice()" *ngIf="!isEditing" type="submit" class="a-button a-button--primary -without-icon">

@@ -20,8 +20,10 @@ export class FormDeviceComponent implements OnInit {
   public isEditing: boolean = false
   public device?: Device
   public files: string = environment.URLFiles
-  private subscriptionsNumberOfFields: number = 0
+  public subscriptionsNumberOfFields: number = 0
+
   public arraySubscriptiosForGenerateInputs: number[] = []
+  public susbscriptionsArray: Subscription[] = []
   public readonly message: Message;
 
   public formDevice: FormGroup = new FormGroup({
@@ -62,36 +64,31 @@ export class FormDeviceComponent implements OnInit {
   public registerDevice() {
     const susbscriptions: Subscription[] = []
     const formData: FormData = new FormData()
-
+    console.log(this.formDevice);
+    
     formData.append("name", this.formDevice.value.name)
     formData.append("description", this.formDevice.value.description)
     formData.append("foto", this.fotoFile)
     formData.append("document", this.documentFile)
 
     this.deviceService.postDevice(formData).subscribe({
-      next:(device) => {
-        this.arraySubscriptiosForGenerateInputs.forEach(e => {
-          susbscriptions.push({
-            title: this.formDevice.controls['subscription_title_' + e].value,
-            description: this.formDevice.controls['subscription_description_' + e].value,
-            deviceId: device.deviceId
-          } as Subscription)
+      next: (device) => {
+        this.susbscriptionsArray.forEach((e,i) => {
+          e.title = this.formDevice.controls['subscription_title_'+i].value
+          e.description = this.formDevice.controls['subscription_description_'+i].value
+          e.deviceId = device.deviceId
         })
-
         this.subscriptionService.postSubscriptions(susbscriptions).subscribe({
           next: () => this.message.messageSuccess(`Device ${device.name} created with success`),
           error: (e) => this.message.messageError(`Error `),
         })
       },
-
-      error: (e : HttpErrorResponse) => {        
-        e.error.errors[""].forEach((error : string[]) => {
+      error: (e: HttpErrorResponse) => {
+        e.error.errors[""].forEach((error: string[]) => {
           this.message.messageError(`${error}`)
         });
       }
-    }
-    )
-
+    })
   }
 
   public updateDevice() {
@@ -103,19 +100,19 @@ export class FormDeviceComponent implements OnInit {
     formData.append("foto", this.fotoFile)
     formData.append("document", this.documentFile)
 
-
     this.deviceService.putDevice(this.idDeviceForEdit, formData).subscribe(device => {
-      this.arraySubscriptiosForGenerateInputs.forEach((e) => {
+      this.susbscriptionsArray.forEach((_,i) => {
         susbscriptions.push({
-          subscriptionId: this.device?.subscriptions[e]?.subscriptionId,
-          title: this.formDevice.controls['subscription_title_' + e].value,
-          description: this.formDevice.controls['subscription_description_' + e].value,
+          subscriptionId: this.device?.subscriptions[i]?.subscriptionId,
+          title: this.formDevice.controls['subscription_title_'+i].value,
+          description: this.formDevice.controls['subscription_description_'+i].value,
           deviceId: this.device?.deviceId
-
         } as Subscription)
       })
+      console.log(susbscriptions);
+      
       this.subscriptionService.putSubscription(susbscriptions).subscribe(() => {
-        this.message.messageSuccess("Device updated with success")
+        // this.message.messageSuccess("Device updated with success")
       })
     })
   }
@@ -130,23 +127,23 @@ export class FormDeviceComponent implements OnInit {
     this.formDevice.patchValue({ documentName: this.documentFile.name })
   }
 
-  public addSubscriptionOnForms() {
+  public addSubscriptionOnForms(subscription : Subscription = {} as Subscription) {
+    this.susbscriptionsArray.push(subscription)
     this.subscriptionsNumberOfFields++
-    this.arraySubscriptiosForGenerateInputs = [...Array(this.subscriptionsNumberOfFields).keys()]
+
     this.formDevice.addControl(`subscription_title_${this.subscriptionsNumberOfFields - 1}`, new FormControl(undefined, Validators.required))
     this.formDevice.addControl(`subscription_description_${this.subscriptionsNumberOfFields - 1}`, new FormControl(undefined, Validators.required))
-
   }
 
-  public deleteSubscriptionFromForms() {
+  public deleteSubscriptionFromForms(i: number) {
+    this.susbscriptionsArray.splice(i, 1)
+    this.subscriptionsNumberOfFields--
+
     this.formDevice.removeControl(`subscription_title_${this.subscriptionsNumberOfFields - 1}`)
     this.formDevice.removeControl(`subscription_description_${this.subscriptionsNumberOfFields - 1}`)
-    this.subscriptionsNumberOfFields--
-    this.arraySubscriptiosForGenerateInputs = [...Array(this.subscriptionsNumberOfFields).keys()]
   }
 
-
-  public deleteSubscription(id : number) {
+  public deleteSubscription(id: number) {
     this.subscriptionService.deleteSusbscription(id)
   }
 
@@ -157,11 +154,11 @@ export class FormDeviceComponent implements OnInit {
         name: data.name,
         description: data.description
       })
-
+      
       data.subscriptions.forEach((subs, i) => {
-        this.addSubscriptionOnForms()
-        this.formDevice.controls['subscription_title_' + i].patchValue(subs.title)
-        this.formDevice.controls['subscription_description_' + i].patchValue(subs.description)
+        this.addSubscriptionOnForms(subs)
+        this.formDevice.controls[`subscription_title_${this.subscriptionsNumberOfFields - 1}`].patchValue(subs.title)
+        this.formDevice.controls[`subscription_description_${this.subscriptionsNumberOfFields - 1}`].patchValue(subs.description)
       });
     })
   }
