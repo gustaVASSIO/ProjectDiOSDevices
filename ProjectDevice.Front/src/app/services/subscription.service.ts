@@ -15,4 +15,7 @@ export class SubscriptionService {
   public putSubscription(subscription : Subscription[]) : Observable<Subscription>{
     return this.http.put<Subscription>(`${environment.API}/Subscriptions`,subscription)
   }
+  public deleteSusbscription(id : number) : Observable<void>{
+    return this.http.delete<void>(`${environment.API}/Subscriptions/${id}`)
+  }
 }

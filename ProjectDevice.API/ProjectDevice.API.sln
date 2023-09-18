@@ -5,11 +5,7 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectDevice.API", "ProjectDevice.API\ProjectDevice.API.csproj", "{47E33821-2BA0-48B2-8A82-789BFBCECACF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4D731E33-FA9F-44EE-8E08-BA90DA037725}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectDevice.Tests", "TestDevices\ProjectDevice.Tests.csproj", "{5D0E198E-7437-450A-A333-5C9E8050085C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{724BA450-CE72-4D7F-9632-3C9396BE6390}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectDevice.APIGateway", "ProjectDevice.APIGateway\ProjectDevice.APIGateway.csproj", "{09996EAD-A602-41E3-839B-877818D80CE0}"
 EndProject
@@ -34,10 +30,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5D0E198E-7437-450A-A333-5C9E8050085C} = {4D731E33-FA9F-44EE-8E08-BA90DA037725}
-		{09996EAD-A602-41E3-839B-877818D80CE0} = {724BA450-CE72-4D7F-9632-3C9396BE6390}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3BFAB39-B06B-4957-AADF-9AC136AB884B}

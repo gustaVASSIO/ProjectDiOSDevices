@@ -57,8 +57,6 @@ export class FormDeviceComponent implements OnInit {
       }
 
     })
-    console.log(this.formDevice);
-    
   }
 
   public registerDevice() {
@@ -89,7 +87,6 @@ export class FormDeviceComponent implements OnInit {
       error: (e : HttpErrorResponse) => {        
         e.error.errors[""].forEach((error : string[]) => {
           this.message.messageError(`${error}`)
-          
         });
       }
     }
@@ -110,7 +107,7 @@ export class FormDeviceComponent implements OnInit {
     this.deviceService.putDevice(this.idDeviceForEdit, formData).subscribe(device => {
       this.arraySubscriptiosForGenerateInputs.forEach((e) => {
         susbscriptions.push({
-          subscriptionId: this.device?.subscriptions[e].subscriptionId,
+          subscriptionId: this.device?.subscriptions[e]?.subscriptionId,
           title: this.formDevice.controls['subscription_title_' + e].value,
           description: this.formDevice.controls['subscription_description_' + e].value,
           deviceId: this.device?.deviceId
@@ -149,7 +146,8 @@ export class FormDeviceComponent implements OnInit {
   }
 
 
-  public deleteSubscription() {
+  public deleteSubscription(id : number) {
+    this.subscriptionService.deleteSusbscription(id)
   }
 
   private loadFormsForEdit(id: string) {
